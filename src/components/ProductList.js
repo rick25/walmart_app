@@ -15,6 +15,10 @@ const ProductList = (props) => {
                 </h4>
                 <div className="card-text bg-white p-1">
                     {p.description}
+                    <button className="btn btn-success btn-sm float-right"
+                        onClick={() => props.addToCart(p)} >
+                        Add To Cart
+                    </button>
                 </div>
             </div>
         )

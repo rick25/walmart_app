@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadProducts } from "../redux/actions/products/index";
 import { loadCategories } from '../redux/actions/categories/index';
-
+import { addToCart } from '../redux/actions/cart/index';
 import Shop from './Shop';
 class Connector extends Component {
     componentDidMount() {
@@ -41,7 +41,8 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = {
     loadProducts,
-    loadCategories
+    loadCategories,
+    addToCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Connector);
