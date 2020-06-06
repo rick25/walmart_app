@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const loadCategories = () => {
+export const loadCategories = () => {
     return distpatch => {
         axios.get('http://localhost:3003/categories')
             .then(response => {
@@ -11,5 +11,3 @@ const loadCategories = () => {
             })
     }
 }
-
-export { loadCategories };

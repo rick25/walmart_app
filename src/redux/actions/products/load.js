@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const loadProducts = () => {
+export const loadProducts = () => {
     return distpatch => {
         axios.get('http://localhost:3003/products')
             .then(response => {
@@ -11,5 +11,3 @@ const loadProducts = () => {
             })
     }
 }
-
-export { loadProducts };
