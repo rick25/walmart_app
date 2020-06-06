@@ -24,15 +24,32 @@ const cart = (storeData, action) => {
             return newStore;
 
         case 'UPDATE_CART':
-
-            break;
+            newStore.cart = newStore.cart.map(item => {
+                if (item.product.id === action.payload.product.id) {
+                    const diff = action.payload.quantity - item.quantity;
+                    newStore.cartItems += diff;
+                    newStore.cartPrice += (item.product.price * diff);
+                    return action.payload;
+                } else {
+                    return item;
+                }
+            })
+            return newStore;
 
         case 'CART_REMOVE':
-
-            break;
+            let selection = newStore.cart.find(item => item.product.id === action.payload.id);
+            newStore.cartItems -= selection.quantity;
+            newStore.cartPrice -= selection.quantity * selection.product.price;
+            newStore.cart = newStore.cart.filter(item => item !== selection);
+            return newStore;
 
         case 'CLEAR_CART':
-            break;
+            return {
+                ...storeData,
+                cart: [],
+                cartItems: 0,
+                cartPrice: 0
+            }
 
         default:
             return storeData || {};

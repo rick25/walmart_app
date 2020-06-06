@@ -3,8 +3,9 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadProducts } from "../redux/actions/products/index";
 import { loadCategories } from '../redux/actions/categories/index';
-import { addToCart } from '../redux/actions/cart/index';
+import { addToCart, updateCartQuantity, removeFromCart, clearCart } from '../redux/actions/cart/index';
 import Shop from './Shop';
+import { CartDetails } from './CartDetails';
 class Connector extends Component {
     componentDidMount() {
         this.props.loadProducts();
@@ -29,6 +30,16 @@ class Connector extends Component {
                         />
                     }
                 />
+                <Route path="/shop/cart"
+                    render={routeProps =>
+                        <CartDetails
+                            {...this.props.cart}
+                            {...routeProps}
+                            updateCartQuantity={this.props.updateCartQuantity}
+                            removeFromCart={this.props.removeFromCart}
+                        />
+                    }
+                />
                 <Redirect to="shop/products" />
             </Switch>
         )
@@ -42,7 +53,10 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = {
     loadProducts,
     loadCategories,
-    addToCart
+    addToCart,
+    updateCartQuantity,
+    removeFromCart,
+    clearCart,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Connector);

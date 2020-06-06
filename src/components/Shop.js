@@ -4,6 +4,11 @@ import ProductList from './ProductList';
 import CartSummary from './CartSummary';
 
 const Shop = (props) => {
+    const handleAddToCart = (...args) => {
+        props.addToCart(...args);
+        props.history.push("/shop/cart");
+    }
+
     return (
         <div className="container-fluid">
             <div className="row">
@@ -17,7 +22,7 @@ const Shop = (props) => {
                     <CategoryNavigation baseUrl="/shop/products" categories={props.categories} />
                 </div>
                 <div className="col-9 p-2">
-                    <ProductList products={props.products} addToCart={props.addToCart} />
+                    <ProductList products={props.products} addToCart={handleAddToCart} />
                 </div>
             </div>
         </div>
