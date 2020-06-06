@@ -1,22 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { products } from "./reducers/products";
+import { categories } from "./reducers/categories";
 
-const products = (state = [], action) => {
-    switch (action.type) {
-        case 'LOAD_PRODUCTS':
-            return action.payload;
-        default:
-            return state;
-    }
-}
+const reducers = combineReducers({
+    products,
+    categories,
+})
 
-const categories = (state = [], action) => {
-    switch (action.type) {
-        case 'LOAD_CATEGORIES':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-export default createStore(combineReducers({ products, categories }), applyMiddleware(thunk));
+export default createStore(reducers, applyMiddleware(thunk));
